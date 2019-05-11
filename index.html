@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<title>vlog</title>
+<link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/Swiper/4.5.0/css/swiper.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="pace.min.js"></script>
+</head>
+<body>
+	<div class="page-content" id="content">
+		<div class="time-log" v-for="(timeItem,index) in message_data">
+			<div class="time-title">{{timeItem.time}}</div>
+			<div class="list-message">
+				<template v-for="(msg,msg_index) in timeItem.items">
+					<div :class="{item: true, 'item-left': msg.name != 'ᴀʜᴀᴏ', 'item-right': msg.name == 'ᴀʜᴀᴏ'}">
+						<div class="user-img">
+							<img :src="'http://q2.qlogo.cn/headimg_dl?dst_uin=' + (msg.name != 'ᴀʜᴀᴏ' ? '1066262383' : '857744323') + '&spec=640'">
+						</div>
+						<div class="message">
+							<div class="user-info">
+								<span>{{msg.name.trim()}}</span>
+								<span class="message-time">{{msg.time}}</span>
+							</div>
+							<div class="content">{{msg.content && msg.content.length > 0 ? getContent(msg.content) : '&nbsp;'}}<i></i></div>
+						</div>
+					</div>
+				</template>
+			</div>
+		</div>
+		<div class="nextPage" @click="nextPageData">加载下页</div>
+	</div>
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+	<script src="https://cdn.bootcss.com/Swiper/4.5.0/js/swiper.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+	<script src="./json/message_data.json?callback=message_callback"></script>
+</body>
+</html>
